@@ -3,7 +3,7 @@ package Basket;
 public class Beverages extends Item {
 	private double capacity;
 	
-	Beverages(String name, double price, int code, Date expiryDate, int capacity)
+	public Beverages(String name, double price, int code, Date expiryDate, int capacity)
 	{
 		super(name, price, code, expiryDate);
 		this.capacity = capacity;

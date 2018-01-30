@@ -13,18 +13,29 @@ public class Basket {
 	}
 	public void addItem(Item item)
 	{
-		basket.add(item);
-		balance += item.getPrice();
-		System.out.println("item added");
+		if(basket.add(item))
+		{
+			balance += item.getPrice();
+			System.out.println("item added");
+		}
 	}
 
 	public void deleteItem(Item item)
 	{
-		basket.remove(item);
-		balance -= item.getPrice();
-		System.out.println("item deleted");
+		if(basket.remove(item))
+		{
+			balance -= item.getPrice();
+			System.out.println("item deleted");
+		}
 	}
-
+	public void basketHolds()
+	{
+		for(Item e: basket)
+		{
+			System.out.println(e.getName());
+		}
+		System.out.println("current balance to pay £"+ getBalance());
+	}
 	public void voidItems()
 	{
 		for(Item e: basket)

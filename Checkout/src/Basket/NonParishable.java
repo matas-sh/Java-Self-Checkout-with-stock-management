@@ -3,7 +3,7 @@ package Basket;
 public class NonParishable extends Item {
 	private double weight;
 	
-	NonParishable(String name, double price, int code, Date useBy, double weight)
+	public NonParishable(String name, double price, int code, Date useBy, double weight)
 	{
 		super(name, price, code, useBy);
 		this.weight = weight;
