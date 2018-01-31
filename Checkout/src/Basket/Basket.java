@@ -3,6 +3,7 @@ import java.util.*;
 
 public class Basket {
 	private double balance;
+	private boolean isEmpty = true;
 	private ArrayList<Item> basket;
 	
 	public Basket()
@@ -10,6 +11,10 @@ public class Basket {
 		basket = new ArrayList<Item>();
 		balance = 0.0;
 		System.out.println("basket created");
+	}
+	public boolean isEmpty()
+	{
+		return basket.isEmpty();
 	}
 	public void addItem(Item item)
 	{
@@ -22,29 +27,47 @@ public class Basket {
 
 	public void deleteItem(Item item)
 	{
-		if(basket.remove(item))
+		if(!isEmpty())
 		{
-			balance -= item.getPrice();
-			System.out.println("item deleted");
+			if(basket.remove(item))
+			{
+				balance -= item.getPrice();
+				System.out.println("item deleted");
+			}
+		}
+		else
+		{
+			System.out.println("there is no item like this to delete");
 		}
 	}
 	public void basketHolds()
 	{
-		for(Item e: basket)
+		if(!isEmpty())
 		{
-			System.out.println(e.getName());
+			for(Item e: basket)
+			{
+				System.out.println(e.getName());
+			}
+			System.out.println("current balance to pay £"+ getBalance());
 		}
-		System.out.println("current balance to pay £"+ getBalance());
+		else
+		{
+			System.out.println("There is nothing in the basket");
+		}
 	}
 	public void voidItems()
 	{
-		for(Item e: basket)
+		if(!isEmpty())
 		{
-			basket.remove(e);
+			for(int i=0; i<basket.size(); i++)
+			{
+				balance -= basket.get(i).getPrice();
+				basket.remove(i);								
+			}
 		}
-		if(basket.isEmpty())
+		else
 		{
-			balance = 0.0;
+			System.out.println("There is nothing to void");
 		}
 	}
 	public String Checkout(double customerMoney)
@@ -61,6 +84,7 @@ public class Basket {
 		{
 			receipt+= (e.getName()+"  "+e.getPrice()+"  "+e.getCode());
 			receipt+= '\n';
+			deleteItem(e);
 		}
 		if(customerMoney > balance)
 		{

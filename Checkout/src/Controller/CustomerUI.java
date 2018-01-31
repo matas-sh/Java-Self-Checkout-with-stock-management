@@ -4,8 +4,7 @@ import java.util.Scanner;
 import Basket.*;
 
 public class CustomerUI {
-	private boolean IsEmpty, transactionCompeleted = false;
-	private static String[] options = { "Add", "Status", "Delete", "Checkout", "Exit"}; 
+	private static String[] options = { "Add", "Status", "Delete", "Checkout", "Exit", "Restart"}; 
 	public CustomerUI()
 	{
 
@@ -18,18 +17,19 @@ public class CustomerUI {
 		Scanner userInput = new Scanner(System.in);
 		System.out.println("Welcome, What would you like to do?");
 		ui.showOptions();
+		Item defautItem = new NonParishable("Cracker Bread", 2.20, 1, new Date(13, 02, 2018), 2.17);
 		while(!finish)
 		{
 			int userStep = ui.inputChecker(userInput.nextLine());
 			if(userStep== 1)
 			{
 				System.out.println("which item would you like to add?");
-				basket.addItem(new NonParishable("Cracker Bread", 2.20, 1, new Date(13, 02, 2018), 2.17));
+				basket.addItem(defautItem);
 			}
 			if(userStep== 2)
 			{
 				System.out.println("Which item would you like to delete");
-				basket.deleteItem(new NonParishable("Cracker Bread", 2.20, 1, new Date(13, 02, 2018), 2.17));
+				basket.deleteItem(defautItem);
 			}
 			if(userStep== 3)
 			{
@@ -37,13 +37,20 @@ public class CustomerUI {
 			}
 			if(userStep== 4)
 			{
-				basket.Checkout(50.0);
+				String receipt = basket.Checkout(50.0);
+				System.out.println(receipt);
 			}
 			if(userStep== 5)
 			{
 				finish = true;
+				break;	
 			}
 			if(userStep == 6)
+			{
+				basket.voidItems();
+				basket.basketHolds();
+			}
+			if(userStep == 7)
 			{
 				System.out.println("invalid command, please try again available options are: ");
 				
@@ -68,8 +75,10 @@ public class CustomerUI {
 			return 4;
 		case "Exit":
 			return 5;
+		case "Restart":
+			return 6;
 		}
-		return 6;
+		return 7;
 	}
 	public void showOptions()
 	{
