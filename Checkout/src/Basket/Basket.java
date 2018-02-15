@@ -59,11 +59,8 @@ public class Basket {
 	{
 		if(!isEmpty())
 		{
-			for(int i=0; i<basket.size(); i++)
-			{
-				balance -= basket.get(i).getPrice();
-				basket.remove(i);								
-			}
+			basket = new ArrayList<Item>();
+			System.out.println("Items voided");
 		}
 		else
 		{
@@ -84,8 +81,8 @@ public class Basket {
 		{
 			receipt+= (e.getName()+"  "+e.getPrice()+"  "+e.getCode());
 			receipt+= '\n';
-			deleteItem(e);
 		}
+		voidItems();
 		if(customerMoney > balance)
 		{
 			receipt += "your change is £"+ (customerMoney- balance)+". Thank you for your purchase "+'\n';
@@ -96,9 +93,9 @@ public class Basket {
 		}
 		return receipt;
 	}
-
 	public double getBalance()
 	{
 		return balance;
 	}
+	
 }

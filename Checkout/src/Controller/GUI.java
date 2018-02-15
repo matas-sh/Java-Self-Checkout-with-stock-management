@@ -1,5 +1,10 @@
 package Controller;
-
-public class GUI {
+import Basket.Basket;
+public class GUI extends UI{
+	public GUI(Basket basket)
+	{
+		super(basket);
+		Basket customerBasket = basket;
+	}
 
 }
